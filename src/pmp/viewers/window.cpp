@@ -513,7 +513,10 @@ int Window::run()
 
 void Window::render_frame()
 {
-    glfwMakeContextCurrent(window_);
+    if (glfwGetCurrentContext() != window_)
+    {
+        glfwMakeContextCurrent(window_);
+    }
 
 #if __EMSCRIPTEN__
     // dynamicall adjust window size based on container
