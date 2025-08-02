@@ -121,6 +121,8 @@ public:
         overlays_.push_back(std::move(drawable));
     }
 
+    GLuint get_texture_id() const { return texture_; };
+
 protected:
     const SurfaceMesh& mesh_;
 
