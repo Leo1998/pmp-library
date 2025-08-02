@@ -114,6 +114,8 @@ public:
     //! \throw IOException in case of failure to load texture from file
     void load_matcap(const std::filesystem::path& filename);
 
+    GLuint get_texture_id() const { return texture_; };
+
 protected:
     const SurfaceMesh& mesh_;
 
