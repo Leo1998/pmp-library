@@ -73,7 +73,7 @@ void read_off(SurfaceMesh& mesh, const std::filesystem::path& file)
         is_binary = true;
         c += 6;
     }
-    if (c[0] == ' ')
+    if (c[0] == ' ' || c[0] == '\r')
         ++c;
 
     if (has_hcoords)
@@ -131,7 +131,7 @@ void read_off_ascii(SurfaceMesh& mesh, FILE* in, const bool has_normals,
         colors = mesh.vertex_property<Color>("v:color");
 
     // read line, but skip comment lines
-    while (lp && (lp[0] == '#' || lp[0] == '\n'))
+    while (lp && (lp[0] == '#' || lp[0] == '\n' || lp[0] == '\r'))
     {
         lp = fgets(line.data(), 1000, in);
     }
@@ -151,7 +151,7 @@ void read_off_ascii(SurfaceMesh& mesh, FILE* in, const bool has_normals,
         do
         {
             lp = fgets(line.data(), 1000, in);
-        } while (lp && (lp[0] == '#' || lp[0] == '\n'));
+        } while (lp && (lp[0] == '#' || lp[0] == '\n' || lp[0] == '\r'));
         lp = line.data();
 
         // position
@@ -205,7 +205,7 @@ void read_off_ascii(SurfaceMesh& mesh, FILE* in, const bool has_normals,
         do
         {
             lp = fgets(line.data(), 1000, in);
-        } while (lp && (lp[0] == '#' || lp[0] == '\n'));
+        } while (lp && (lp[0] == '#' || lp[0] == '\n' || lp[0] == '\r'));
         lp = line.data();
 
         // #vertices
